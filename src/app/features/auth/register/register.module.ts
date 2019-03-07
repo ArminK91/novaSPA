@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 
     FormsModule,
   ],
-  exports: [],
+  exports: [RegisterComponent],
   declarations: [RegisterComponent, TermsModalComponent]
 })
 export class RegisterModule { }

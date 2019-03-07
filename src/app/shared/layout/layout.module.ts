@@ -48,6 +48,7 @@ import {UtilsModule} from "../utils/utils.module";
     RibbonComponent,
     ShortcutComponent,
     LayoutSwitcherComponent,
+    MainLayoutComponent
   ]
 })
 export class SmartadminLayoutModule{

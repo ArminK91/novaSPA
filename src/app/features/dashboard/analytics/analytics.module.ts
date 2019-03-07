@@ -36,6 +36,7 @@ import {D3Module} from "@app/shared/graphs/d3/d3.module";
 
     TodoListComponent
   ],
+  exports: [AnalyticsComponent],
   providers: [],
 })
 export class AnalyticsModule {

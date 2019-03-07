@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { routerTransition } from "@app/shared/utils/animations";
+import { User } from "@app/core/models/user";
+import { UserService } from "@app/core/services/user.service";
 
 @Component({
   selector: "app-main-layout",
@@ -8,9 +10,25 @@ import { routerTransition } from "@app/shared/utils/animations";
   animations: [routerTransition]
 })
 export class MainLayoutComponent implements OnInit {
-  constructor() {}
+  currentUser: User;
+  users: User[] = [];
 
-  ngOnInit() {}
+  constructor(private userService: UserService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+ 
+    ngOnInit() {
+        this.loadAllUsers();
+    }
+ 
+    deleteUser(_id: string) {
+        this.userService.delete(_id).subscribe(() => { this.loadAllUsers() });
+    }
+ 
+    private loadAllUsers() {
+        this.userService.getAll().subscribe(users => { this.users = users; });
+    }
 
   getState(outlet) {
     if(!outlet.activatedRoute) return;

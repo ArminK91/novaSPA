@@ -3,10 +3,15 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { MainLayoutComponent } from "./shared/layout/app-layouts/main-layout.component";
 import { AuthLayoutComponent } from "./shared/layout/app-layouts/auth-layout.component";
+import { AuthGuard } from "./core/guards/auth.guard";
+import { LoginComponent } from "./features/auth/login/login.component";
+import { RegisterComponent } from "./features/auth/register/register.component";
+import { AnalyticsComponent } from "./features/dashboard/analytics/analytics.component";
 
 const routes: Routes = [
-  {
-    path: "",
+  
+    // { path: '', component: MainLayoutComponent, pathMatch: 'full'},
+   { path: "",
     component: MainLayoutComponent,
     data: { pageTitle: "Home" },
     children: [
@@ -100,17 +105,28 @@ const routes: Routes = [
         loadChildren:
           "./features/widgets/widgets-showcase.module#WidgetsShowcaseModule",
         data: { pageTitle: "Widgets" }
-      }
-    ]
-  },
+      }]
+    },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: 'dashboard/analytics', component: MainLayoutComponent  },
+    { path: 'auth/register', component: RegisterComponent },
 
-  {
-    path: "auth",
-    component: AuthLayoutComponent,
-    loadChildren: "./features/auth/auth.module#AuthModule"
-  },
-  { path: "**", redirectTo: "miscellaneous/error404" }
-];
+
+    { path: '**', redirectTo: 'not-found' }
+
+  
+       
+    ];
+  
+
+//   {
+//     path: "auth",
+//     component: AuthLayoutComponent,
+//     loadChildren: "./features/auth/auth.module#AuthModule"
+//   },
+//   { path: "**", redirectTo: "miscellaneous/error404" }
+// ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],

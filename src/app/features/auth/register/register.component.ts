@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { AuthService } from '@app/core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -15,17 +16,19 @@ export class RegisterComponent implements OnInit {
 
   bsModalRef: BsModalRef;
   public termsAgreed = false
-
+  loading: boolean;
+  model: any = {};
   constructor(
     private router: Router,  
-    private modalService: BsModalService) {}
+    private modalService: BsModalService,
+    private authService: AuthService) {}
  
    ngOnInit() {}
 
-  register(event){
-    event.preventDefault();
-    this.router.navigate(['/dashboard'])
-  }
+  // register(event){
+  //   event.preventDefault();
+  //   this.router.navigate(['/dashboard'])
+  // }
 
   openModal(event, template: TemplateRef<any>) {
     event.preventDefault();
@@ -40,6 +43,18 @@ export class RegisterComponent implements OnInit {
   onTermsClose(){
     this.bsModalRef.hide()
   }
+
+  register() {
+    this.loading = true;
+    this.authService.create(this.model)
+        .subscribe(
+            data => {
+                this.router.navigate(['/login']);
+            },
+            error => {
+                this.loading = false;
+            });
+}
 
 
 }

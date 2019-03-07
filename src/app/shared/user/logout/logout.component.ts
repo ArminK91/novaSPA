@@ -35,11 +35,18 @@ export class LogoutComponent implements OnInit {
       },
       ButtonPressed => {
         if (ButtonPressed == "Yes") {
-          this.logout();
+          this.onLoggedout();
         }
       }
     );
   }
+
+  onLoggedout() {
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('isLoggedin');
+    this.router.navigate(["login"]);
+
+}
 
   logout() {
     this.userService.logout()
