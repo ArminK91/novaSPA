@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/internal/operators/map';
 import { Response } from '@angular/http';
 import { User } from '../models/user';
-import { AppConfig } from '../models/domains';
+import { AppConfig, UserData } from '../models/domains';
 
 
 @Injectable()
@@ -17,24 +17,33 @@ export class AuthService {
 
   }
 
+  
+
   login(username: string, password: string) {
     //console.log("Login ruta:", this.config.apiUrl );
     console.log("Podaci za autentikaciju: " + username + " passeword: " + password);
     return this.http.post('http://localhost:54058/api/identity/authenticate', { username: username, password: password })
-        .pipe(map((response: Response) => {
+        .pipe(map((response: any) => {
             // login successful if there's a jwt token in the response
             console.log("Dobio neki response: ",response);
             console.log("DAJ JSON OVOG USERA: ", JSON.stringify(response));
            //let user = response.json();
-
+           const user = response;
             if (response) {
                 console.log("Postavi token!");
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
+                
                 localStorage.setItem('currentUser', JSON.stringify(response));
+                var token = JSON.stringify(response);
+                console.log("Moj token: ", user);
+                
+                localStorage.setItem('token', user.token);
                 
             }
         }));
 }
+
+
 
 logout() {
     // remove user from local storage to log user out

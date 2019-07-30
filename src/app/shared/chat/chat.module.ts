@@ -8,11 +8,11 @@ import { ChatBodyComponent } from './chat/chat-body.component';
 import { ChatFormComponent } from './chat/chat-form.component';
 import {FormsModule} from "@angular/forms";
 import {UtilsModule} from "@app/shared/utils/utils.module";
-import {PipesModule} from "@app/shared/pipes/pipes.module";
 import {UserModule} from "@app/shared/user/user.module";
 import { AsideChatComponent } from './aside-chat/aside-chat.component';
 import { AsideChatUserComponent } from './aside-chat-user/aside-chat-user.component';
 import {BsDropdownModule, PopoverModule} from "ngx-bootstrap"
+import { PipesModule } from "../pipes/pipes.module";
 
 @NgModule({
   imports: [

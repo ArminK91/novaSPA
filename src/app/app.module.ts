@@ -10,8 +10,12 @@ import { LoginModule } from './features/auth/login/login.module';
 import { RegisterModule } from './features/auth/register/register.module';
 import { AnalyticsModule } from './features/dashboard/analytics/analytics.module';
 import { SmartadminLayoutModule } from './shared/layout';
-
-
+import { JwtModule } from "@auth0/angular-jwt";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 
 @NgModule({
   declarations: [
@@ -28,9 +32,17 @@ import { SmartadminLayoutModule } from './shared/layout';
     FormsModule,
     ReactiveFormsModule,
     AnalyticsModule,
-    SmartadminLayoutModule
+    SmartadminLayoutModule,
+    JwtModule.forRoot({
+      config: {
+        //tokenGetter: tokenGetter,
+        whitelistedDomains: ["http://localhost:54058"]
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

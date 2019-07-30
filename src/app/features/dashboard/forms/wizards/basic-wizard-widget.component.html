@@ -1,0 +1,348 @@
+<div sa-widget [editbutton]="false" [deletebutton]="false" color="darken">
+  <!-- widget options:
+  usage: <div sa-widget [editbutton]="false">
+
+  [colorbutton]="false"
+  [editbutton]="false"
+  [togglebutton]="false"
+  [deletebutton]="false"
+  [fullscreenbutton]="false"
+  [custombutton]="false"
+  [collapsed]="true"
+  [sortable]="false"
+
+  -->
+  <header>
+    <span class="widget-icon"> <i class="fa fa-check"></i> </span>
+
+    <h2>Dodavanje proizvoda </h2>
+
+  </header>
+
+  <!-- widget div-->
+  <div>
+
+    <!-- widget content -->
+    <div class="widget-body">
+
+      <div class="row">
+        <form novalidate="novalidate">
+          <div class="col-sm-12">
+            <div class="form-bootstrapWizard clearfix">
+              <ul class="bootstrapWizard">
+                <li *ngFor="let pane of steps; let i = index" [class.active]="activeStep == pane">
+                  <a (click)="setActiveStep(pane)"> <span class="step">
+                      <span *ngIf="!pane.checked">{{i + 1}}</span>
+                      <i class="fa fa-check" *ngIf="pane.checked"></i>
+                    </span> <span class="title">{{pane.title}}</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content">
+              <div class="tab-pane" [class.active]="activeStep.key == 'step1'">
+                <br>
+
+                <h3><strong>Korak 1 </strong> - Osnovne informacije</h3>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>Tip prozivoda</label>
+                      <select class="form-control input-sm" name="tipProizvoda" #tipProizvoda="ngModel" required
+                        [(ngModel)]="proizvod.tipProizvoda" (click)="onPromjenaTipa()">
+                        <option *ngFor="let item of tipovi" [value]="item.vrijednost">{{item.naziv}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Naziv proizvoda</label>
+                      <input class="form-control input-sm" placeholder="Naziv proizvoda" type="text"
+                        name="nazivProizvoda" #nazivProizvoda="ngModel" required [(ngModel)]="proizvod.naziv">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Adresa</label>
+                      <input class="form-control input-sm" placeholder="Adresa" type="text" name="adresa"
+                        #adresa="ngModel" required [(ngModel)]="proizvod.adresa">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Opis</label>
+                      <input type="text" class="form-control input-sm" name="opis" placeholder="Opis" #opis="ngModel"
+                        required [(ngModel)]="proizvod.opis">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Cijena</label>
+                      <input type="text" class="form-control input-sm" name="cijena" placeholder="Cijena"
+                        #cijena="ngModel" required [(ngModel)]="proizvod.cijena">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="tab-pane" [class.active]="activeStep.key == 'step2'">
+                <br>
+                <h3><strong>Korak 2</strong> - Detaljnije informacije</h3>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                        <label >Marka</label>
+                        <input class="form-control input-sm" placeholder="Marka" type="text" name="marka"
+                          [(ngModel)]="proizvod.auto.marka" #marka="ngModel">
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                        <label >Boja</label>
+                        <input class="form-control input-sm" placeholder="Boja" type="text" name="boja"
+                          [(ngModel)]="proizvod.auto.boja" #boja="ngModel">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label >Kilometri</label>
+                      <input type="number" class="form-control input-sm" name="Kilometri" [(ngModel)]="proizvod.auto.kilometri"
+                        #kilometri="ngModel">
+                  </div>
+                </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                        <label >Godste</label>
+                        <input type="text" class="form-control input-sm" name="godiste" [(ngModel)]="proizvod.auto.godiste" #godiste="ngModel">
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label >Motor</label>
+                        <input type="text" class="form-control input-sm" name="motor" [(ngModel)]="proizvod.auto.motor"
+                          #motor="ngModel">
+                    </div>
+                  </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                          <label>Podizaci stakala</label>
+                          <input type="text" class="form-control input-sm" name="podizaci" [(ngModel)]="proizvod.auto.podizaciStakala" #godiste="ngModel">
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+
+              <!-- <div class="tab-content"> -->
+              <div class="tab-pane" *ngIf="produktAuto" [class.active]="activeStep.key == 'step2'">
+                <br>
+                <h3><strong>Korak 2</strong> - Detaljnije informacije</h3>
+                <div class="row">
+                 <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Marka</label>
+                      <input class="form-control input-sm" placeholder="Marka" type="text" name="marka"
+                        [(ngModel)]="auto.marka"/>
+                  </div> 
+                </div> 
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Boja</label>
+                      <input class="form-control input-sm" placeholder="Boja" type="text" name="boja"
+                        [(ngModel)]="auto.boja" #boja="ngModel">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Kilometri</label>
+                      <input type="number" class="form-control input-sm" name="Kilometri"
+                        [(ngModel)]="auto.kilometri" #kilometri="ngModel">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Godste</label>
+                      <input type="text" class="form-control input-sm" name="godiste"
+                        [(ngModel)]="auto.godiste" #godiste="ngModel">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Motor</label>
+                      <input type="text" class="form-control input-sm" name="motor" [(ngModel)]="auto.motor"
+                        #motor="ngModel">
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label><input type="checkbox" name="podizacistakala" [(ngModel)]="auto.podizaciStakala"
+                          class="checkbox style-0"><span>Podizaci Stakala</span></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label><input type="checkbox" name="servo" [(ngModel)]="auto.servoVolan"
+                          class="checkbox style-0"><span>Servo</span></label>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label><input type="checkbox" name="klima" [(ngModel)]="auto.klima"
+                          class="checkbox style-0"><span>Klima</span></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label><input type="checkbox" name="zastita" [(ngModel)]="auto.zastita"
+                          class="checkbox style-0"><span>Zastita</span></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label><input type="checkbox" name="xenoni" [(ngModel)]="auto.xenoni"
+                          class="checkbox style-0"><span>Xenoni</span></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label><input type="checkbox" name="grijaciSjedista" [(ngModel)]="auto.grijaciSjedista"
+                          class="checkbox style-0"><span>Grijaci sjedista</span></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label><input type="checkbox" name="siber" [(ngModel)]="auto.siber"
+                          class="checkbox style-0"><span>Siber</span></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-sm-4">
+                      <label><input type="checkbox" name="registrovan" [(ngModel)]="auto.registrovan"
+                          class="checkbox style-0"><span>Registrovan</span></label>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>Detaljan opis</label>
+                      <textarea type="text" class="form-control" placeholder="Detaljan opis"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- </div> -->
+              <div class="tab-pane" [class.active]="activeStep.key == 'step3'">
+                <br>
+
+                <h3><strong>Korak 3</strong> - Upload slika</h3>
+
+                <div class="form-group">
+                  <sa-upload [productId]="productId" (onUploadFinished)="uploadFinished($event)"></sa-upload>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                  <div class="offset-md-5 col-md-2">
+                    <button type="button" class="btn btn-primary" (click)="onCreate()">Create </button>
+                  </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Slika</th>
+                        <th scope="col">Naziv</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let slk of slike">
+                        <td><img [src]="createImgPath(slk.imgPath)" alt="profile picture"
+                            style="width:60px; height:60px;"></td>
+                        <td>{{slk.naziv}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="tab-pane" [class.active]="activeStep.key == 'step4'">
+                <br>
+
+                <h3><strong>Korak 4</strong> - Dodaj proizvod</h3>
+                <br>
+
+                <h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i> Complete</strong></h1>
+                <h4 class="text-center">Click next to finish</h4>
+                <br>
+                <br>
+              </div>
+
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <ul class="pager wizard no-margin">
+                      <li class="previous">
+                        <a (click)="prevStep()" [class.disabled]="steps.indexOf(activeStep) == 0"
+                          class="btn btn-lg btn-default"> Previous
+                        </a>
+                      </li>
+                      <li class="next">
+                        <a (click)="nextStep()" [class.disabled]="activeStep.submitted && !activeStep.valid"
+                          class="btn btn-lg txt-color-darken"> Next
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <!-- end widget content -->
+
+  </div>
+  <!-- end widget div -->
+
+</div>

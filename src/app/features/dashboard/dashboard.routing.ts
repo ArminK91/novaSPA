@@ -10,11 +10,12 @@ export const routes: Routes = [
     path: 'analytics',
     loadChildren:'./analytics/analytics.module#AnalyticsModule',
 
-  },
-  {
-    path: 'social',
-    loadChildren:'./social/social.module#SocialModule',
   }
+  // {
+  //   path: 'wizards',
+  //   loadChildren:'./wizards/wizarads.module#WizardsModule',
+  // }
+
 ];
 
 export const routing = RouterModule.forChild(routes);
