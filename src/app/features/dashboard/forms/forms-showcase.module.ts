@@ -11,13 +11,15 @@ import { SharedModule } from "@app/shared/shared.module";
 import { SmartadminWizardsModule } from "@app/shared/forms/wizards/smartadmin-wizards.module";
 import { CommonModule } from "@angular/common";
 import { UploadComponent } from './wizards/upload/upload.component';
+import { SlikeComponent } from './wizards/slike/slike.component';
+import { FileUploadModule } from "ng2-file-upload";
 
 @NgModule({
   declarations: [
     OrdersComponent,
     WizardsComponent, 
     BasicWizardWidgetComponent, 
-    UploadComponent
+    UploadComponent, SlikeComponent
   ],
   imports: [
     routing,
@@ -26,7 +28,8 @@ import { UploadComponent } from './wizards/upload/upload.component';
     SmartadminDatatableModule,
     SharedModule,
     SmartadminWizardsModule,
-    CommonModule
+    CommonModule,
+    FileUploadModule,
   ],
   providers: [],
   entryComponents: [],

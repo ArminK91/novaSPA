@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { GeneralServiceService } from './general-service.service';
 import { map, catchError } from 'rxjs/operators';
-import { Product, Auto } from '../models/domains';
-import { Observable } from 'rxjs';
+import { Product, Auto, Slika } from '../models/domains';
+import { Observable, Observer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,319 +32,38 @@ export class ProizvodiServisService {
       ));
     }
 
-    dohvatiSveDostupneProizvode(): Product[] {
-      var products = Array<Product>();
+    dohvatiSveDostupneProizvode(): Observable<Product[]> {
 
-      products = [{
-        "id": 1,  
-        "adresa": "Nancy Davolio",
-        "opis": "Premier Buy",
-        "cijena": 1740,
-        "tipProizvoda": 2,
-        "tipProizvodaOpis": "Opis proizvoda 2",
-        "auto": {
-          "id": 1,
-          "boja": "Crna",
-          "godiste": new Date(),
-          "grijaciSjedista": true,
-          "kilometri": 120000,
-          "klima": true,
-          "marka": "Audi",
-          "motor": "Dizel",
-          "opis": "Auto je jako dobar",
-          "podizaciStakala": true,
-          "registrovan": true,
-          "servoVolan": true,
-          "siber": true,
-          "status": 1,
-          "xenoni": true,
-          "zastita": true
-        }
-    },
-    {
-      "id": 2,
-      "adresa": "Nancy Davolio",
-      "opis": "Premier Buy",
-      "cijena": 1740,
-      "tipProizvoda": 2,
-      "tipProizvodaOpis": "Opis proizvoda 2",
-      "auto": {
-        "id": 1,
-        "boja": "Crna",
-        "godiste": new Date(),
-        "grijaciSjedista": true,
-        "kilometri": 120000,
-        "klima": true,
-        "marka": "Audi",
-        "motor": "Dizel",
-        "opis": "Auto je jako dobar",
-        "podizaciStakala": true,
-        "registrovan": true,
-        "servoVolan": true,
-        "siber": true,
-        "status": 1,
-        "xenoni": true,
-        "zastita": true
-      }
-    },
-    {
-      "id": 3,
-      "adresa": "Nancy Davolio",
-      "opis": "Premier Buy",
-      "cijena": 1740,
-      "tipProizvoda": 2,
-      "tipProizvodaOpis": "Opis proizvoda 2",
-      "auto": {
-        "id": 1,
-        "boja": "Crna",
-        "godiste": new Date(),
-        "grijaciSjedista": true,
-        "kilometri": 120000,
-        "klima": true,
-        "marka": "Audi",
-        "motor": "Dizel",
-        "opis": "Auto je jako dobar",
-        "podizaciStakala": true,
-        "registrovan": true,
-        "servoVolan": true,
-        "siber": true,
-        "status": 1,
-        "xenoni": true,
-        "zastita": true
-      }
-    },
-    {
-      "id": 4,
-        "adresa": "Nancy Davolio",
-        "opis": "Premier Buy",
-        "cijena": 1740,
-        "tipProizvoda": 2,
-        "tipProizvodaOpis": "Opis proizvoda 2",
-        "auto": {
-          "id": 1,
-          "boja": "Crna",
-          "godiste": new Date(),
-          "grijaciSjedista": true,
-          "kilometri": 120000,
-          "klima": true,
-          "marka": "Audi",
-          "motor": "Dizel",
-          "opis": "Auto je jako dobar",
-          "podizaciStakala": true,
-          "registrovan": true,
-          "servoVolan": true,
-          "siber": true,
-          "status": 1,
-          "xenoni": true,
-          "zastita": true
-        }
-    },
-    {
-      "id": 5,
-        "adresa": "Nancy Davolio",
-        "opis": "Premier Buy",
-        "cijena": 1740,
-        "tipProizvoda": 2,
-        "tipProizvodaOpis": "Opis proizvoda 2",
-        "auto": {
-          "id": 1,
-          "boja": "Crna",
-          "godiste": new Date(),
-          "grijaciSjedista": true,
-          "kilometri": 120000,
-          "klima": true,
-          "marka": "Audi",
-          "motor": "Dizel",
-          "opis": "Auto je jako dobar",
-          "podizaciStakala": true,
-          "registrovan": true,
-          "servoVolan": true,
-          "siber": true,
-          "status": 1,
-          "xenoni": true,
-          "zastita": true
-        }
-    },
-    {
-      "id": 6,
-      "adresa": "Nancy Davolio",
-      "opis": "Premier Buy",
-      "cijena": 1740,
-      "tipProizvoda": 2,
-      "tipProizvodaOpis": "Opis proizvoda 2",
-      "auto": {
-        "id": 1,
-        "boja": "Crna",
-        "godiste": new Date(),
-        "grijaciSjedista": true,
-        "kilometri": 120000,
-        "klima": true,
-        "marka": "Audi",
-        "motor": "Dizel",
-        "opis": "Auto je jako dobar",
-        "podizaciStakala": true,
-        "registrovan": true,
-        "servoVolan": true,
-        "siber": true,
-        "status": 1,
-        "xenoni": true,
-        "zastita": true
-      }
-    },
-    {
-      "id": 12,
-      "adresa": "Nancy Davolio",
-      "opis": "Premier Buy",
-      "cijena": 1740,
-      "tipProizvoda": 2,
-      "tipProizvodaOpis": "Opis proizvoda 2",
-      "auto": {
-        "id": 1,
-        "boja": "Crna",
-        "godiste": new Date(),
-        "grijaciSjedista": true,
-        "kilometri": 120000,
-        "klima": true,
-        "marka": "Audi",
-        "motor": "Dizel",
-        "opis": "Auto je jako dobar",
-        "podizaciStakala": true,
-        "registrovan": true,
-        "servoVolan": true,
-        "siber": true,
-        "status": 1,
-        "xenoni": true,
-        "zastita": true
-      }
-    },
-    {
-      "id": 13,
-      "adresa": "Nancy Davolio",
-      "opis": "Premier Buy",
-      "cijena": 1740,
-      "tipProizvoda": 2,
-      "tipProizvodaOpis": "Opis proizvoda 2",
-      "auto": {
-        "id": 1,
-        "boja": "Crna",
-        "godiste": new Date(),
-        "grijaciSjedista": true,
-        "kilometri": 120000,
-        "klima": true,
-        "marka": "Audi",
-        "motor": "Dizel",
-        "opis": "Auto je jako dobar",
-        "podizaciStakala": true,
-        "registrovan": true,
-        "servoVolan": true,
-        "siber": true,
-        "status": 1,
-        "xenoni": true,
-        "zastita": true
-      }
-    },
-    {
-      "id": 14,
-        "adresa": "Nancy Davolio",
-        "opis": "Premier Buy",
-        "cijena": 1740,
-        "tipProizvoda": 2,
-        "tipProizvodaOpis": "Opis proizvoda 2",
-        "auto": {
-          "id": 1,
-          "boja": "Crna",
-          "godiste": new Date(),
-          "grijaciSjedista": true,
-          "kilometri": 120000,
-          "klima": true,
-          "marka": "Audi",
-          "motor": "Dizel",
-          "opis": "Auto je jako dobar",
-          "podizaciStakala": true,
-          "registrovan": true,
-          "servoVolan": true,
-          "siber": true,
-          "status": 1,
-          "xenoni": true,
-          "zastita": true
-        }
-    },
-    {
-      "id": 15,
-      "adresa": "Nancy Davolio",
-      "opis": "Premier Buy",
-      "cijena": 1740,
-      "tipProizvoda": 2,
-      "tipProizvodaOpis": "Opis proizvoda 2",
-      "auto": {
-        "id": 1,
-        "boja": "Crna",
-        "godiste": new Date(),
-        "grijaciSjedista": true,
-        "kilometri": 120000,
-        "klima": true,
-        "marka": "Audi",
-        "motor": "Dizel",
-        "opis": "Auto je jako dobar",
-        "podizaciStakala": true,
-        "registrovan": true,
-        "servoVolan": true,
-        "siber": true,
-        "status": 1,
-        "xenoni": true,
-        "zastita": true
-      }
-    }];
-return products;
-      // return this.generalService.get('/api/sviproizvodi').pipe(
-      //     map((response => response as Product[]),
-      //     catchError((error =>  error => console.log("")))
-      //   ));
+      return this.generalService.get('products/sviproizvodi').pipe(
+          map((response => response as Product[]),
+          catchError((error =>  error => console.log("")))
+        ));
       }
 
-getProductById(_id: number): Product {
+getProductById(_id: number): Observable<Product> {
 
-  var product = {
-    "id": 1,  
-    "adresa": "Nancy Davolio",
-    "opis": "Premier Buy",
-    "cijena": 1740,
-    "tipProizvoda": 2,
-    "tipProizvodaOpis": "Opis proizvoda 2",
-    "auto": {
-      "id": 1,
-      "boja": "Crna",
-      "cijena": 43563,
-      "godiste": new Date(),
-      "grijeaciSjedista": true,
-      "kilometri": 120000,
-      "klima": true,
-      "marka": "Audi",
-      "motor": "Dizel",
-      "opis": "Auto je jako dobar",
-      "podizaciStakala": true,
-      "registrovan": true,
-      "servoVolan": true,
-      "siber": true,
-      "status": 1,
-      "xenoni": true,
-      "zastita": true
-    }
+   return this.generalService.get('products/getproductbyid/' + _id).pipe(
+        map((response => response as Product),
+        catchError((error =>  error => console.log("")))
+      ));
+  
 };
 
-return product;
-    // return this.generalService.get('/api/products/' + _id).pipe(
-    //     map((response => response as Product),
-    //     catchError((error =>  error => console.log("")))
-    //   ));
-}
+postaviGlavnuSliku(productId: number, id: number): Observable<Slika[]> {
+  return this.generalService.post('proizvodislike/' + productId + '/postaviglavnu/' + id, {})
+  .pipe(map((response => response as Slika[]),
+  catchError((error => error => console.log("")))
+  ));
+};
+   
+
 
 createProduct(product: Product): Observable<Product> {
     return this.generalService.post('products/saveproduct', product)
     .pipe(map((response => response as Product),
     catchError((error => error => console.log("")))
     ));
-}
+};
 
 updateProduct(product: Product): Observable<Product> {
     return this.generalService.put('products/updateproduct', product)

@@ -13,14 +13,15 @@ export class ProductsViewComponent implements OnInit {
 
 
   dohvatiDostupneProizvode() {
-    this.proizvodi = this.proizvodService.dohvatiSveDostupneProizvode();
-    // this.proizvodService.dohvatiSveDostupneProizvode().subscribe(data => {
-    //   this.proizvodi = data;
-    // },
-    //   error => {
-    //     console.log("Greska!");
-    //   }
-    // )
+    //this.proizvodi = this.proizvodService.dohvatiSveDostupneProizvode();
+    this.proizvodService.dohvatiSveDostupneProizvode().subscribe(data => {
+      this.proizvodi = data;
+      console.log("Proizvodi iz baze: ", this.proizvodi);
+    },
+      error => {
+        console.log("Greska!");
+      }
+    )
   }
 
   ngOnInit() {

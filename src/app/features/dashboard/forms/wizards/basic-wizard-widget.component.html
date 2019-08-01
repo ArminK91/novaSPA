@@ -176,7 +176,7 @@
                     <div class="form-group">
                       <label>Godste</label>
                       <input type="text" class="form-control input-sm" name="godiste"
-                        [(ngModel)]="auto.godiste" #godiste="ngModel">
+                        [(ngModel)]="auto.godiste" #godiste="ngModel"> 
                     </div>
                   </div>
                 </div>
@@ -272,21 +272,22 @@
 
                 <h3><strong>Korak 3</strong> - Upload slika</h3>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <sa-upload [productId]="productId" (onUploadFinished)="uploadFinished($event)"></sa-upload>
-                </div>
+                </div> -->
                 <br>
                 <br>
-                <div class="row">
+                <!-- <div class="row">
                   <div class="offset-md-5 col-md-2">
                     <button type="button" class="btn btn-primary" (click)="onCreate()">Create </button>
                   </div>
-                </div>
+                </div> -->
                 <br>
                 <br>
                 <div class="form-group">
+                  <sa-slike [slike]="proizvod.slike" [proizvod]="proizvod" (uploadDone)="onUploadGotov($event)"></sa-slike>
 
-                  <table class="table table-striped">
+                  <!-- <table class="table table-striped">
                     <thead>
                       <tr>
                         <th scope="col">Slika</th>
@@ -300,7 +301,7 @@
                         <td>{{slk.naziv}}</td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table> -->
                 </div>
               </div>
               <div class="tab-pane" [class.active]="activeStep.key == 'step4'">
@@ -346,3 +347,11 @@
   <!-- end widget div -->
 
 </div>
+
+<script type="text/javascript">
+  $(function () {
+      $('#datetimepicker3').datetimepicker({
+          format: 'LT'
+      });
+  });
+</script>

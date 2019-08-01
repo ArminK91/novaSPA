@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FileUploadModule } from 'ng2-file-upload';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -13,6 +14,7 @@ import { SmartadminLayoutModule } from './shared/layout';
 import { JwtModule } from "@auth0/angular-jwt";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
+
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -33,6 +35,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     AnalyticsModule,
     SmartadminLayoutModule,
+    FileUploadModule,
     JwtModule.forRoot({
       config: {
         //tokenGetter: tokenGetter,

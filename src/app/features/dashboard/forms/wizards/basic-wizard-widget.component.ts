@@ -76,6 +76,12 @@ export class BasicWizardWidgetComponent implements OnInit, DoCheck {
     }
   }
 
+  onUploadGotov(status: boolean){
+    if(status){
+      this.dohvatiProizvod();
+    }
+  }
+
   dohvatiSifarnik() {
     this.helperService.dohvatiTipoveProizvoda().subscribe(data => {
       console.log("TIpovi response: ", data);
@@ -192,6 +198,17 @@ export class BasicWizardWidgetComponent implements OnInit, DoCheck {
     this.auto.proizvodId = this.proizvod.id;
     this.produktServis.snimiProizvodAuto(this.auto).subscribe(data => {
       this.auto = data;
+    },
+    error => {
+
+    });
+  }
+
+  dohvatiProizvod(){
+    console.log("DOhvacanje proizvoda nakon upload done!");
+    this.produktServis.getProductById(this.proizvod.id).subscribe(data => {
+      this.proizvod = data;
+      this.slike = this.proizvod.slike;
     },
     error => {
 

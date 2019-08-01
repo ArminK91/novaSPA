@@ -18,6 +18,10 @@ export const environment = {
   smartadmin: {
     api: null,
     db: 'smartadmin-angular'
-  }
+  },
+
+  apiUrl: 'http://localhost:54058/api/'
 
 };
+
+

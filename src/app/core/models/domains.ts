@@ -53,12 +53,19 @@ export class AppConfig {
     opis?:string;
     adresa?:string;
     auto?: Auto;
+    slike?: Slika[];
     constructor() {
       this.id = 0;
-    
-
-      //this.auto = new Auto();
+      this.slike = new Array<Slika>();
     }
+  }
+
+  export class Slika{
+    id?:number;
+    url?:string;
+    datumDodavanja?: Date;
+    opis?: string;
+    glavna?: boolean;
   }
 
   export class Auto {
@@ -67,7 +74,7 @@ export class AppConfig {
     marka?:string;
     opis?:string;
     kilometri?:number;
-    godiste?:Date;
+    godiste?:string;
     motor?: string;
     podizaciStakala?:boolean;
     servoVolan?:boolean;
@@ -82,7 +89,7 @@ export class AppConfig {
     constructor(){
       this.id = 0;
       this.boja = "",
-      this.godiste = new Date(),
+      this.godiste = "",
       this.grijaciSjedista = false,
       this.kilometri = 0,
       this.klima = false,

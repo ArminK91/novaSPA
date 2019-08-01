@@ -1,4 +1,4 @@
-<div id="content" data-sparkline-container="" data-easy-pie-chart-container="">
+<div id="content" data-sparkline-container="" data-easy-pie-chart-container="" *ngIf="isLoaded">
   <div class="row">
     <sa-big-breadcrumbs [items]="['E-Commerce', 'Product Details']" icon="shopping-cart" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
 
@@ -20,9 +20,9 @@
 
 
                 <carousel [interval]="3000">
-                  <slide *ngFor="let slide of product.slides"
-                         [active]="slide.active">
-                    <img class="img-responsive" [src]="slide.src" style="margin:auto;">
+                  <slide *ngFor="let slika of proizvod.slike"
+                         [active]="slika.active">
+                    <img class="img-responsive" src="{{slika.url}}" style="margin:auto;">
                   </slide>
                 </carousel>
 
