@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GeneralServiceService } from './general-service.service';
 import { map, catchError } from 'rxjs/operators';
-import { Product, Auto, Slika } from '../models/domains';
+import { Product, Auto, Slika, ProductWrapper } from '../models/domains';
 import { Observable, Observer } from 'rxjs';
 
 @Injectable({
@@ -12,11 +12,20 @@ export class ProizvodiServisService {
   constructor(private generalService: GeneralServiceService) { }
 
   getAllProductForUser(): Observable<Product[]> {
-    return this.generalService.get('products').pipe(
+    
+    return this.generalService.get('products/dajproizvodekorisnika').pipe(
         map((response => response as Product[]),
         catchError((error =>  error => console.log("")))
       ));
     }
+
+    getAllProductForUser2(): Observable<JSON> {
+    
+      return this.generalService.get('products/dajproizvodekorisnika2').pipe(
+          map((response => response as JSON),
+          catchError((error =>  error => console.log("")))
+        ));
+      }
 
     snimiProizvodAuto(auto: Auto): Observable<Auto> {
       return this.generalService.post('automobil/snimiauto', auto).pipe(

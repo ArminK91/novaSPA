@@ -9,13 +9,13 @@ import { SmartadminLayoutModule } from '@app/shared/layout';
 import { SmartadminWidgetsModule } from '@app/shared/widgets/smartadmin-widgets.module';
 import { SmartadminDatatableModule } from '@app/shared/ui/datatable/smartadmin-datatable.module';
 import { PitanjaComponent } from '../pitanja/pitanja.component';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
 
     routing,
-
+    FormsModule,
     SmartadminLayoutModule,
     SmartadminWidgetsModule,
     SmartadminDatatableModule,

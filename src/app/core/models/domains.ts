@@ -60,6 +60,10 @@ export class AppConfig {
     }
   }
 
+  export class ProductWrapper{
+    data?: Product[];
+  }
+
   export class Slika{
     id?:number;
     url?:string;

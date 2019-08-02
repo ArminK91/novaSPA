@@ -7,6 +7,8 @@ import {
 } from "@angular/core";
 
 import "script-loader!smartadmin-plugins/datatables/datatables.min.js";
+import { ProizvodiServisService } from "@app/core/services/proizvodi-servis.service";
+import { Product, ProductWrapper } from "@app/core/models/domains";
 
 @Component({
   selector: "sa-datatable",
@@ -27,13 +29,34 @@ export class DatatableComponent implements OnInit {
   @Input() public tableClass: string;
   @Input() public width: string = "100%";
 
-  constructor(private el: ElementRef) {}
+  proizvodi: Product[];
+  p: JSON;
+  prodW: ProductWrapper = {};
+  constructor(private el: ElementRef, private proizvodService: ProizvodiServisService) { }
 
   ngOnInit() {
-    this.render();
+    this.dohvati().add(() => this.render());
+    console.log("proizvodi u tabeli: ", this.proizvodi);
+
+    //this.render();
+  }
+
+  dohvati() {
+    return this.proizvodService.getAllProductForUser2().subscribe(data => {
+      this.p = data;
+      console.log("PROIZVODISS: ", this.p);
+
+      //this.prodW.data = this.proizvodi;
+
+      //this.p = JSON.stringify(this.prodW);
+    },
+      error => {
+        console.log("Greska prilikom dohvata proizvoda!");
+      });
   }
 
   render() {
+    console.log("Usao u render");
     let element = $(this.el.nativeElement.children[0]);
     let options = this.options || {};
 
@@ -41,16 +64,19 @@ export class DatatableComponent implements OnInit {
     if (options.buttons) toolbar += "B";
     if (this.paginationLength) toolbar += "l";
     if (this.columnsHide) toolbar += "C";
+    options.ajax = this.p;
 
-    if (typeof options.ajax === "string") {
-      let url = options.ajax;
-      options.ajax = {
-        url: url
-        // complete: function (xhr) {
-        //
-        // }
-      };
-    }
+    // if (typeof options.ajax === 'string') {
+    //   let url = options.ajax;
+    //   options.ajax = {
+    //     url: url,
+    //     // complete: function (xhr) {
+    //     //
+    //     // }
+    //   }
+    // }
+
+    console.log("OPCIJE: ", options);
 
     options = $.extend(options, {
       dom:
@@ -66,21 +92,21 @@ export class DatatableComponent implements OnInit {
       },
       autoWidth: false,
       retrieve: true,
-      responsive: true,
-      initComplete: (settings, json) => {
-        element
-          .parent()
-          .find(".input-sm")
-          .removeClass("input-sm")
-          .addClass("input-md");
-      }
+      responsive: true
+      // initComplete: (settings, json) => {
+      //   element
+      //     .parent()
+      //     .find(".input-sm")
+      //     .removeClass("input-sm")
+      //     .addClass("input-md");
+      // }
     });
 
     const _dataTable = element.DataTable(options);
 
     if (this.filter) {
       // Apply the filter
-      element.on("keyup change", "thead th input[type=text]", function() {
+      element.on("keyup change", "thead th input[type=text]", function () {
         _dataTable
           .column(
             $(this)
@@ -103,7 +129,7 @@ export class DatatableComponent implements OnInit {
 
     if (this.detailsFormat) {
       let format = this.detailsFormat;
-      element.on("click", "td.details-control", function() {
+      element.on("click", "td.details-control", function () {
         var tr = $(this).closest("tr");
         var row = _dataTable.row(tr);
         if (row.child.isShown()) {

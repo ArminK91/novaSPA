@@ -13,6 +13,8 @@ import { CommonModule } from "@angular/common";
 import { UploadComponent } from './wizards/upload/upload.component';
 import { SlikeComponent } from './wizards/slike/slike.component';
 import { FileUploadModule } from "ng2-file-upload";
+import { DxDataGridModule, DxBulletModule, DxTemplateModule } from 'devextreme-angular';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,9 @@ import { FileUploadModule } from "ng2-file-upload";
     SmartadminWizardsModule,
     CommonModule,
     FileUploadModule,
+    DxDataGridModule,
+    DxBulletModule,
+    DxTemplateModule
   ],
   providers: [],
   entryComponents: [],
