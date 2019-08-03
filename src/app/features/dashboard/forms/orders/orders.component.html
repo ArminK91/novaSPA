@@ -21,18 +21,20 @@
             <dxi-column caption="Cijena" dataField="cijena" format="currency"
               dataType="number" alignment="right" [allowGrouping]="false"></dxi-column>
             <dxi-column dataField="datumObjave" dataType="date"></dxi-column>
-            <dxi-column dataField="status" dataType="string"></dxi-column>
+            <dxi-column caption="Status" dataField="statusSlogaOpis" dataType="string"></dxi-column>
+            <dxi-column caption="Status proizvoda" dataField="statusProizvodaOpis" dataType="string"></dxi-column>
 
-            <dxi-column caption="Akcije" cellTemplate="akcijeCellTemplate" [width]="250"></dxi-column>
 
-            <div *dxTemplate="let d of 'akcijeCellTemplate'">
-              <div class="form-group">
-                <button class="btn btn-success btn-xs mr-1"> Edituj</button>
-                <button class="btn btn-warning btn-xs mr-1"> Okončaj oglas</button>
-                <button class="btn btn-danger btn-xs mr-1"> Obriši</button>
-
-              </div>
+            <dxi-column dataField="" alignment="center"  [allowFiltering]="false"
+                            [allowSorting]="false" cellTemplate="buttonColumnTemplate" caption="Akcije" fixedPosition="right"></dxi-column>
+            <div *dxTemplate="let data of 'buttonColumnTemplate'" class="col-buttons">
+                
+                        <button class="btn btn-success btn-xs mr-1" (click)="editujProizvod(data.data)"> Edituj</button>
+                <button class="btn btn-warning btn-xs mr-1" [disabled]="data.data.statusProizvoda != 1" (click)="okoncajOglas(data.data)"> {{data.data.statusProizvoda === 1 ? 'Okoncaj oglas' : 'Zavrsen'}}</button>
+                <button class="btn btn-danger btn-xs mr-1" (click)="obrisiProizvod(data.data)"> Obriši</button>
             </div>
+          
+            
           </dx-data-grid>
         </div>
       </div>

@@ -5,10 +5,12 @@
     <!-- <sa-shopping-cart></sa-shopping-cart> -->
   </div>
   <!-- row -->
-  <sa-widgets-grid>
+  <!-- <sa-widgets-grid> -->
 
     <!-- row -->
-
+    <div class="panel panel-default">
+        <div class="panel-heading">Detalji proizvoda</div>
+        <div class="panel-body">
     <div class="row">
 
       <div class="col-sm-12 col-md-12 col-lg-12">
@@ -34,18 +36,18 @@
               <h2 class="name">
                 {{proizvod.naziv}}<br>
                 {{proizvod.auto.marka}}
-                <small>Objavio <a (click)="(null)">Adeline</a></small>
+                <small>Objavio <a (click)="(null)">{{proizvod.user.username}}</a></small>
                
 
               </h2>
               <hr>
               <h3 class="price-container">
-                {{proizvod.cijena}} KM
+                {{proizvod.cijena | currency : "KM" }} 
                 
               </h3>
               <br>
               Adresa: {{proizvod.adresa}} <br>
-              Datum Objave: {{proizvod.datumObjave}} <br>
+              Datum Objave: {{proizvod.datumObjave | date: 'dd/MM/yyyy hh:mm'}} <br>
 
               <hr>
               <div class="description description-tabs">
@@ -134,7 +136,7 @@
                   </div>
                   <div class="tab-pane fade" id="reviews">
                     <br>
-                  <sa-pitanja></sa-pitanja>
+                  <sa-pitanja [proizvodId]="proizvod.id"></sa-pitanja>
 
                 </div>
                 </div>
@@ -165,9 +167,11 @@
       
 
     </div>
+  </div>
+</div>
 
     <!-- end row -->
 
-  </sa-widgets-grid>
+  <!-- </sa-widgets-grid> -->
   <!-- end row -->
 </div>

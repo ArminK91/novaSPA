@@ -1,8 +1,8 @@
 
-  <form method="post" class="well padding-bottom-10" onsubmit="return false;">
-    <textarea rows="2" class="form-control" placeholder="Napisite poruku"></textarea>
+  <form class="well padding-bottom-10">
+    <textarea rows="2" class="form-control" [(ngModel)]="poruka.tekst" name="tekst" placeholder="Napisite poruku"></textarea>
     <div class="margin-top-10">
-      <button type="submit" class="btn btn-sm btn-primary pull-right">
+      <button type="button" (click)="snimiPitanje()" class="btn btn-sm btn-primary pull-right">
         Postavi pitanje
       </button>
       <a (click)="(null)" class="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Location"><i class="fa fa-location-arrow"></i></a>
@@ -14,43 +14,17 @@
 
   <div class="chat-body no-padding profile-message">
     <ul>
-      <li class="message">
-        <img src="assets/img/avatars/1.png" class="online">
+      <li class="message" *ngFor="let item of poruke">
+        <!-- <img src="assets/img/avatars/1.png" class="online"> -->
         <span class="message-text">
-                <a (click)="(null)" class="username">
-                                                      Alisha Molly
-                                                      <span class="badge">Purchase Verified</span>
-                
-                                                  </a>
-
-
-                Can't divide were divide fish forth fish to. Was can't form the, living life grass darkness very image let unto fowl isn't in blessed fill life yielding above all moved
+                <a (click)="(null)" class="username">{{item.user.username}}</a>
+                {{item.tekst}}
               </span>
-        <ul class="list-inline font-xs">
-        
-          <li class="pull-right">
-            <small class="text-muted pull-right ultra-light"> Posted 1 year ago </small>
+         <ul class="list-inline font-xs">
+        <li class="pull-right">
+            <small class="text-muted pull-right ultra-light"> Postavljeno {{ item.datumObjave | date: 'dd/MM/yyyy hh:mm' }} </small>
           </li>
-        </ul>
-      </li>
-      <li class="message">
-        <img src="assets/img/avatars/2.png" class="online">
-        <span class="message-text">
-                <a (click)="(null)" class="username">
-                                                      Aragon Zarko
-                                                      <span class="badge">Purchase Verified</span>
-                 
-                                                  </a>
-
-
-                Excellent product, love it!
-              </span>
-        <ul class="list-inline font-xs">
-      
-          <li class="pull-right">
-            <small class="text-muted pull-right ultra-light"> Posted 1 year ago </small>
-          </li>
-        </ul>
+        </ul> 
       </li>
     </ul>
   </div>

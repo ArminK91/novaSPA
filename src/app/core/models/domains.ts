@@ -1,3 +1,5 @@
+import { NumberValueAccessor } from "@angular/forms/src/directives";
+
 //import { Settings } from "http2";
 
 export class AppConfig {
@@ -10,6 +12,16 @@ export class AppConfig {
     lastName?: string;
     username?: string;
     token?: string;
+  }
+
+  export enum StatusSloga{
+    NEAKTIVAN = 0,
+    AKTIVAN = 1
+  }
+
+  export enum StatusProizvoda{
+    AKTIVAN = 1,
+    OKONCAN = 2
   }
 
   export interface Ipr {
@@ -54,14 +66,43 @@ export class AppConfig {
     adresa?:string;
     auto?: Auto;
     slike?: Slika[];
+    status?: StatusSloga;
+    statusProizvoda?: StatusProizvoda;
+    statusSlogaOpis?: string;
+    statusProizvodaOpis?: string;
+    user?: UserVm;
+    poruke?: Poruka[];
     constructor() {
       this.id = 0;
       this.slike = new Array<Slika>();
+      this.poruke = new Array<Poruka>();
+    }
+  }
+
+  export class Poruka{
+    id?:number;
+    tekst?:string;
+    datumObjave?: Date;
+    proizvodId?:number;
+    applicationUserID?:number;
+    status?: number;
+    constructor(){
+      this.id = 0;
+      this.tekst = "";
+      this.datumObjave = null;
+      this.proizvodId = 0;
+      this.applicationUserID = 0;
+      this.status = 0;
     }
   }
 
   export class ProductWrapper{
     data?: Product[];
+  }
+
+  export class UserVm{
+    id?: number;
+    userName?:string;
   }
 
   export class Slika{

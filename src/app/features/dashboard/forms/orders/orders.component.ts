@@ -15,6 +15,32 @@ export class OrdersComponent implements OnInit {
     this.dohvatiProizvodeZaKorisnika();
   }
 
+  editujProizvod(proizvodId: any){
+    console.log("Proizvod: ", proizvodId);
+  }
+
+  okoncajOglas(proizvod: any){
+    console.log("Proizvod: ", proizvod);
+    this.proizvodService.okoncajProizvod(proizvod.id).subscribe(data => {
+      this.proizvodi = data;
+    },
+    error => {
+      console.log("Greska prilikom brisanja!");
+    });
+  }
+
+  obrisiProizvod(proizvod: Product){
+    console.log("Proizvod: ", proizvod);
+    this.proizvodService.deleteProduct(proizvod.id).subscribe(data => {
+      var index = this.proizvodi.indexOf(proizvod);
+
+      this.proizvodi.splice(index, 1);
+    },
+    error => {
+      console.log("Greska prilikom brisanja!");
+    });
+  }
+
   dohvatiProizvodeZaKorisnika(){
     this.proizvodService.getAllProductForUser().subscribe(data => {
       this.proizvodi = data;
